@@ -1,7 +1,6 @@
 import json
-from openneuro_query import query_rawdata
-
-import mne
+from data_loading import load_data
+# from openneuro_query import query_rawdata
 
 def main(dataset_id, tag):
     print("Fetching sub-001 files...")
@@ -19,26 +18,5 @@ if __name__ == "__main__":
     # data_path = mne.datasets.sample.data_path()
     # print(f"Sample dataset path: {data_path}")
 
-    # サンプルデータのパスを取得
-    sample_data_folder = mne.datasets.sample.data_path()
-    
-    sample_data_raw_file = (
-    sample_data_folder / "MEG" / "sample" / "sample_audvis_filt-0-40_raw.fif"
-    )
-
-    # 生データを読み込む
-    raw = mne.io.read_raw_fif(sample_data_raw_file)
-
-    # データをメモリにロード
-    raw.load_data()
-
-    # データの先頭の部分を表示（例: 先頭の5チャンネル、先頭の10サンプル）
-    data = raw.get_data()
-    print(data[:5, :10])
-
-    # EEGデータを取得して表示
-    eeg_data = raw.get_data(picks='eeg')
-    print(eeg_data[:, :10])
-
-    # 生データをプロット
-    raw.plot(duration=5, n_channels=30)
+    load_data()
+   
